@@ -178,6 +178,22 @@
 				RelativePath=".\opengl.c"
 				>
 			</File>
+			<Filter
+				Name="ch7"
+				>
+				<File
+					RelativePath=".\light.c"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="ch6"
+				>
+				<File
+					RelativePath=".\solar.c"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="Header Files"
