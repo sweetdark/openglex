@@ -194,6 +194,14 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="ch8"
+				>
+				<File
+					RelativePath=".\gllist.c"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="Header Files"

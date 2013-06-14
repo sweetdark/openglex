@@ -71,7 +71,7 @@ static void myDisplay(void)
   glutSwapBuffers();
 }
 
-void myIdle(void)
+static void myIdle(void)
 {
   angle += 1.0f;
   if (angle >= 360.0f)
@@ -81,15 +81,15 @@ void myIdle(void)
   myDisplay();
 }
 
-int main(int argc, char *argv[])
-{
-  glutInit(&argc, argv);
-  glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE);
-  glutInitWindowPosition(200, 200);
-  glutInitWindowSize(WIDTH, HEIGHT);
-  glutCreateWindow("π‚’’");
-  glutDisplayFunc(&myDisplay);
-  glutIdleFunc(&myIdle);
-  glutMainLoop();
-  return 0;
-}
+//int main(int argc, char *argv[])
+//{
+//  glutInit(&argc, argv);
+//  glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE);
+//  glutInitWindowPosition(200, 200);
+//  glutInitWindowSize(WIDTH, HEIGHT);
+//  glutCreateWindow("π‚’’");
+//  glutDisplayFunc(&myDisplay);
+//  glutIdleFunc(&myIdle);
+//  glutMainLoop();
+//  return 0;
+//}
