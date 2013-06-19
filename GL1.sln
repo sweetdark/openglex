@@ -3,6 +3,10 @@ Microsoft Visual Studio Solution File, Format Version 9.00
 # Visual Studio 2005
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GL1", "GL1\GL1.vcproj", "{830FE6B4-F114-4C02-BEB6-BF1C4C6D3B5A}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "oglstep1", "oglstep1\oglstep1.vcproj", "{8F1EE73C-2AA2-4313-BE8B-E162D1CA9585}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "oglstep2", "oglstep2\oglstep2.vcproj", "{8408D829-5DD8-4942-AD61-BD63D4E94033}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -13,6 +17,14 @@ Global
 		{830FE6B4-F114-4C02-BEB6-BF1C4C6D3B5A}.Debug|Win32.Build.0 = Debug|Win32
 		{830FE6B4-F114-4C02-BEB6-BF1C4C6D3B5A}.Release|Win32.ActiveCfg = Release|Win32
 		{830FE6B4-F114-4C02-BEB6-BF1C4C6D3B5A}.Release|Win32.Build.0 = Release|Win32
+		{8F1EE73C-2AA2-4313-BE8B-E162D1CA9585}.Debug|Win32.ActiveCfg = Debug|Win32
+		{8F1EE73C-2AA2-4313-BE8B-E162D1CA9585}.Debug|Win32.Build.0 = Debug|Win32
+		{8F1EE73C-2AA2-4313-BE8B-E162D1CA9585}.Release|Win32.ActiveCfg = Release|Win32
+		{8F1EE73C-2AA2-4313-BE8B-E162D1CA9585}.Release|Win32.Build.0 = Release|Win32
+		{8408D829-5DD8-4942-AD61-BD63D4E94033}.Debug|Win32.ActiveCfg = Debug|Win32
+		{8408D829-5DD8-4942-AD61-BD63D4E94033}.Debug|Win32.Build.0 = Debug|Win32
+		{8408D829-5DD8-4942-AD61-BD63D4E94033}.Release|Win32.ActiveCfg = Release|Win32
+		{8408D829-5DD8-4942-AD61-BD63D4E94033}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
