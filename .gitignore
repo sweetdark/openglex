@@ -11,6 +11,7 @@
 *.so.*
 *.dylib
 
+
 # Executables
 *.exe
 *.out
@@ -21,7 +22,16 @@
 *.pdb
 *.ncb
 *.suo
-\*.lik
-\*.pdb
-\*.ncb
-\*.suo
+*.obj
+/*.lik
+/*.pdb
+/*.ncb
+/*.suo
+/*.obj
+Debug
+/*.ncb
+/*.obj
+/*.dep
+/*.htm
+/*.idb
+/*.ilk
