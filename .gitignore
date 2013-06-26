@@ -15,3 +15,13 @@
 *.exe
 *.out
 *.app
+
+#vs
+*.lik
+*.pdb
+*.ncb
+*.suo
+\*.lik
+\*.pdb
+\*.ncb
+\*.suo
