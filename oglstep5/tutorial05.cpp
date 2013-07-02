@@ -4,6 +4,7 @@
 #include <gl/glut.h>
 #include <stdlib.h>
 #include <math.h>
+#include <assert.h>
 #include "math_3d.h"
 
 GLuint VBO;
@@ -111,7 +112,7 @@ static void CompileShaders()
     exit(1);
   }
 
-  gScaleLocation = glGetUniFormLocation(ShaderProgram, "gScale");
+  gScaleLocation = glGetUniformLocation(ShaderProgram, "gScale");
   assert(gScaleLocation != 0xFFFFFFFF);
 
   glValidateProgram(ShaderProgram);
