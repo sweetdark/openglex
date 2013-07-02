@@ -2,8 +2,8 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="8.00"
-	Name="oglstep1"
-	ProjectGUID="{8F1EE73C-2AA2-4313-BE8B-E162D1CA9585}"
+	Name="oglstep3"
+	ProjectGUID="{67E70CB1-B284-4AE3-B9FF-E3C03A7325E9}"
 	>
 	<Platforms>
 		<Platform
@@ -36,6 +36,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
+				AdditionalIncludeDirectories="..\"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -48,6 +49,8 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
+				AdditionalDependencies="glew32.lib glew32s.lib"
+				AdditionalLibraryDirectories="..\lib"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -144,7 +147,7 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath=".\tutorial01.cpp"
+				RelativePath=".\tutorial03.cpp"
 				>
 			</File>
 		</Filter>
