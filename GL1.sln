@@ -13,6 +13,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "oglstep4", "oglstep4\oglste
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "oglstep5", "oglstep5\oglstep5.vcproj", "{85F54F65-0EAD-42DE-899D-F84EC9BC8B10}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "oglstep6", "oglstep6\oglstep6.vcproj", "{884FC0AF-593C-48DF-B717-699083C9D698}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -43,6 +45,10 @@ Global
 		{85F54F65-0EAD-42DE-899D-F84EC9BC8B10}.Debug|Win32.Build.0 = Debug|Win32
 		{85F54F65-0EAD-42DE-899D-F84EC9BC8B10}.Release|Win32.ActiveCfg = Release|Win32
 		{85F54F65-0EAD-42DE-899D-F84EC9BC8B10}.Release|Win32.Build.0 = Release|Win32
+		{884FC0AF-593C-48DF-B717-699083C9D698}.Debug|Win32.ActiveCfg = Debug|Win32
+		{884FC0AF-593C-48DF-B717-699083C9D698}.Debug|Win32.Build.0 = Debug|Win32
+		{884FC0AF-593C-48DF-B717-699083C9D698}.Release|Win32.ActiveCfg = Release|Win32
+		{884FC0AF-593C-48DF-B717-699083C9D698}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
