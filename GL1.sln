@@ -15,6 +15,10 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "oglstep5", "oglstep5\oglste
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "oglstep6", "oglstep6\oglstep6.vcproj", "{884FC0AF-593C-48DF-B717-699083C9D698}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "oglstep7", "oglstep7\oglstep7.vcproj", "{3DD67747-DA12-4FBB-AB89-ECEB63ED617C}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "oglstep8", "oglstep8\oglstep8.vcproj", "{8A971A51-F86F-4020-888F-06EE282C7475}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -49,6 +53,14 @@ Global
 		{884FC0AF-593C-48DF-B717-699083C9D698}.Debug|Win32.Build.0 = Debug|Win32
 		{884FC0AF-593C-48DF-B717-699083C9D698}.Release|Win32.ActiveCfg = Release|Win32
 		{884FC0AF-593C-48DF-B717-699083C9D698}.Release|Win32.Build.0 = Release|Win32
+		{3DD67747-DA12-4FBB-AB89-ECEB63ED617C}.Debug|Win32.ActiveCfg = Debug|Win32
+		{3DD67747-DA12-4FBB-AB89-ECEB63ED617C}.Debug|Win32.Build.0 = Debug|Win32
+		{3DD67747-DA12-4FBB-AB89-ECEB63ED617C}.Release|Win32.ActiveCfg = Release|Win32
+		{3DD67747-DA12-4FBB-AB89-ECEB63ED617C}.Release|Win32.Build.0 = Release|Win32
+		{8A971A51-F86F-4020-888F-06EE282C7475}.Debug|Win32.ActiveCfg = Debug|Win32
+		{8A971A51-F86F-4020-888F-06EE282C7475}.Debug|Win32.Build.0 = Debug|Win32
+		{8A971A51-F86F-4020-888F-06EE282C7475}.Release|Win32.ActiveCfg = Release|Win32
+		{8A971A51-F86F-4020-888F-06EE282C7475}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
