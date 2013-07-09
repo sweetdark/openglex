@@ -6,6 +6,7 @@
 #include "math_3d.h"
 #include <assert.h>
 #include <string.h>
+
 GLint gWorldLocation;
 GLuint VBO;
 
