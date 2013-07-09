@@ -65,15 +65,15 @@ static void myIdle(void)
     myDisplay();
 }
 
-int main(int argc, char* argv[])
-{
-    glutInit(&argc, argv);
-    glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE);
-    glutInitWindowPosition(200, 200);
-    glutInitWindowSize(WIDTH, HEIGHT);
-    glutCreateWindow("OpenGL ´°¿Ú");
-    glutDisplayFunc(&myDisplay);
-    glutIdleFunc(&myIdle);
-    glutMainLoop();
-    return 0;
-}
+//int main(int argc, char* argv[])
+//{
+//    glutInit(&argc, argv);
+//    glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE);
+//    glutInitWindowPosition(200, 200);
+//    glutInitWindowSize(WIDTH, HEIGHT);
+//    glutCreateWindow("OpenGL ´°¿Ú");
+//    glutDisplayFunc(&myDisplay);
+//    glutIdleFunc(&myIdle);
+//    glutMainLoop();
+//    return 0;
+//}
