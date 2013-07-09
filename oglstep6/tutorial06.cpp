@@ -1,18 +1,18 @@
 #include <stdio.h>
-#icnlude <string.h>
+#include <string.h>
 #include <gl/glew.h>
 #include <gl/glut.h>
 #include <stdlib.h>
+#include <math.h>
 #include "math_3d.h"
+#include <assert.h>
 
 GLuint VBO;
-GLint gScaleLocation;
 GLint gWorldLocation;
 
 static const char *pVS = "#version 330	\n"
 "layout (location = 0) in vec3 Position; \n"
 "uniform mat4 gWorld;	\n"
-"uniform float gScale;  \n"
 "void main()		\n"
 "{			\n"
 "	gl_Position = gWorld * vec4(Position, 1.0);	\n"
@@ -22,7 +22,7 @@ static const char *pFS = "#version 330	\n"
 "out vec4 FragColor;	\n"
 "void main()	\n"
 "{		\n"
-"	FragColor = vec4(1.0, 0.0, 0.0, 1.0);	\n"
+"	FragColor = vec4(1.0, 1.0, 0.0, 1.0);	\n"
 "}";
 
 static void RenderSceneCB()
@@ -31,11 +31,10 @@ static void RenderSceneCB()
 	
 	static float Scale = 0.0f;
 	Scale += 0.001f;
-	glUniform1f(gScaleLocation, sinf(Scale));
   
 	Matrix4f World;
-	World.m[0][0] = 1.0f; World.m[0][1] = 0.0f; World.m[0][2] = 0.0f; World.m[0][3] = sinf(Scale);
-	World.m[1][0] = 0.0f; World.m[1][1] = 1.0f; World.m[1][2] = 0.0f; World.m[1][3] = 0.0f;
+	World.m[0][0] = 1.0f; World.m[0][1] = 0.0f; World.m[0][2] = 0.0f; World.m[0][3] = sin(Scale);
+	World.m[1][0] = 0.0f; World.m[1][1] = 0.0f; World.m[1][2] = 0.0f; World.m[1][3] = 0.0f;
 	World.m[2][0] = 0.0f; World.m[2][1] = 0.0f; World.m[2][2] = 1.0f; World.m[2][3] = 0.0f;
 	World.m[3][0] = 0.0f; World.m[3][1] = 0.0f; World.m[3][2] = 0.0f; World.m[3][3] = 1.0f; 
 	
@@ -53,7 +52,7 @@ static void RenderSceneCB()
 
 static void InitializeGlutCallBacks()
 {
-	glutDisplayFun(&RenderSceneCB);
+	glutDisplayFunc(&RenderSceneCB);
 	glutIdleFunc(&RenderSceneCB);
 }
 
@@ -69,7 +68,7 @@ static void CreateVertexBuffer()
 	glBufferData(GL_ARRAY_BUFFER, sizeof(Vertices), Vertices, GL_STATIC_DRAW);
 }
 
-static void AddShader(GLunit ShaderProgram, const char* pShaderText, GLenum ShaderType)
+static void AddShader(GLuint ShaderProgram, const char* pShaderText, GLenum ShaderType)
 {
 	GLuint ShaderObj = glCreateShader(ShaderType);
 
@@ -99,7 +98,7 @@ static void AddShader(GLunit ShaderProgram, const char* pShaderText, GLenum Shad
 
 static void CompileShaders()
 {
-	GLunit ShaderProgram = glCreateProgram();
+	GLuint ShaderProgram = glCreateProgram();
 
 	if (ShaderProgram == 0) {
 		fprintf(stderr, "Error creating shader program\n");
@@ -120,9 +119,7 @@ static void CompileShaders()
 		exit(1);
 	}
 	
-	gWordLocation = glGetUniformLocation(ShaderProgram, "gWorld");
-	gScaleLocation = glGetUniformLocation(ShaderProgram, "gScale");
-	assert(gScaleLocation != 0xFFFFFFFF);
+	gWorldLocation = glGetUniformLocation(ShaderProgram, "gWorld");
 	assert(gWorldLocation != 0xFFFFFFFF);
 	
 	glValidateProgram(ShaderProgram);
@@ -145,7 +142,7 @@ int main(int argc, char **argv)
   glutInitWindowSize(1024, 768);
   glutCreateWindow("Tutorial 06");
 
-  InitializeGlutCallbacks();
+  InitializeGlutCallBacks();
 
   GLenum res = glewInit();
   if (res != GLEW_OK) {
