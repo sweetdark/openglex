@@ -47,17 +47,17 @@ static void InitializeGlutCallBacks()
   glutDisplayFunc(&RenderSenceCB);
 }
 
-int main(int args, char **argv)
-{
-  glutInit(&args, argv);
-  glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
-  glutInitWindowPosition(100, 0);
-  glutInitWindowSize(600, 600);
-  glutCreateWindow("alpha");
-  init();
-  InitializeGlutCallBacks();
-  glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
- 
-  glutMainLoop();
-  return 0;
-}
+//int main(int args, char **argv)
+//{
+//  glutInit(&args, argv);
+//  glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
+//  glutInitWindowPosition(100, 0);
+//  glutInitWindowSize(600, 600);
+//  glutCreateWindow("alpha");
+//  init();
+//  InitializeGlutCallBacks();
+//  glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+// 
+//  glutMainLoop();
+//  return 0;
+//}

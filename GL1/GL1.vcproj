@@ -174,14 +174,6 @@
 			Filter="cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx"
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
-			<File
-				RelativePath=".\alpha.c"
-				>
-			</File>
-			<File
-				RelativePath=".\opengl.c"
-				>
-			</File>
 			<Filter
 				Name="ch7"
 				>
@@ -203,6 +195,18 @@
 				>
 				<File
 					RelativePath=".\gllist.c"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="redbook"
+				>
+				<File
+					RelativePath=".\aargb.c"
+					>
+				</File>
+				<File
+					RelativePath=".\alpha.c"
 					>
 				</File>
 			</Filter>
