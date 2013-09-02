@@ -1,0 +1,15 @@
+CXX= g++
+
+CXXFLAGS=\
+-static\
+-I../include\
+-I../include/GL\
+-D_STDCALL_SUPPORTED\
+-D_M_IX86\
+
+C= gcc
+
+LIBS= -L../lib -lglew32 -lglew32s -lglut32 -lopengl32 -lglu32
+
+
+.PHONY : clean

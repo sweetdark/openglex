@@ -1,3 +1,5 @@
+
+
 #include <gl/glut.h>
 #include <gl/GL.h>
 
@@ -18,7 +20,7 @@ int main(int args, char *argc[]) {
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA);
 	CreateWindow();
 	glutDisplayFunc(RenderScenceCB);
-	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+	glClearColor(1.0f, 0.0f, 0.0f, 0.0f);
 	glutMainLoop();
 	return 0;
 }
