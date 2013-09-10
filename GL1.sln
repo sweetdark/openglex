@@ -25,6 +25,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "oglstep10", "oglstep10\ogls
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "oglsuper3", "oglsuper3\oglsuper3.vcproj", "{BDB4695B-94B9-404D-8D57-617ECE5EC3FE}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "drawline", "drawline\drawline.vcproj", "{DE2F96AA-2C8B-4031-9FFF-8D2DB5FC2FE4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -79,6 +81,10 @@ Global
 		{BDB4695B-94B9-404D-8D57-617ECE5EC3FE}.Debug|Win32.Build.0 = Debug|Win32
 		{BDB4695B-94B9-404D-8D57-617ECE5EC3FE}.Release|Win32.ActiveCfg = Release|Win32
 		{BDB4695B-94B9-404D-8D57-617ECE5EC3FE}.Release|Win32.Build.0 = Release|Win32
+		{DE2F96AA-2C8B-4031-9FFF-8D2DB5FC2FE4}.Debug|Win32.ActiveCfg = Debug|Win32
+		{DE2F96AA-2C8B-4031-9FFF-8D2DB5FC2FE4}.Debug|Win32.Build.0 = Debug|Win32
+		{DE2F96AA-2C8B-4031-9FFF-8D2DB5FC2FE4}.Release|Win32.ActiveCfg = Release|Win32
+		{DE2F96AA-2C8B-4031-9FFF-8D2DB5FC2FE4}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

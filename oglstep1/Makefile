@@ -11,7 +11,7 @@ $(OUTNAME): $(OBJ)
 	$(CXX) $(CXXFLAGS) $^ -o $(OUTNAME) $(LIBS)
 
 clean:
-	rm -f $(OUTNAME)
+	rm -f *.exe
 	rm -f *.o
 
 toturial01.o: toturial01.cpp

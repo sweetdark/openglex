@@ -78,15 +78,16 @@ static void CreateWindow() {
   glutCreateWindow("3d Points");
 }
 
-int main(int args, char **argv)
-{
-	glutInit(&args, argv);
-  glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
-	glutInitWindowSize(200, 200);
-	glutCreateWindow("draw points");
-  SetupRC();
-	glutDisplayFunc(RenderSences);	
-	glutReshapeFunc(ChangeSize);
-	glutMainLoop();
-	return 0;
-}
+//int main(int args, char **argv)
+//{
+//	glutInit(&args, argv);
+//  glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
+//	glutInitWindowSize(200, 200);
+//	glutCreateWindow("draw points");
+//  SetupRC();
+//	glutDisplayFunc(RenderSences);	
+//	glutReshapeFunc(ChangeSize);
+//	glutMainLoop();
+//	return 0;
+//}
+//
