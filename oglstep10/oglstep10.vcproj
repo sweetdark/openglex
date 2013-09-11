@@ -36,7 +36,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="..\"
+				AdditionalIncludeDirectories="..\include"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"

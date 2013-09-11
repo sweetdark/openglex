@@ -2,8 +2,8 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="8.00"
-	Name="oglstep8"
-	ProjectGUID="{8A971A51-F86F-4020-888F-06EE282C7475}"
+	Name="triangle"
+	ProjectGUID="{43775CB6-2EC5-418C-8EE2-2D19413668A5}"
 	>
 	<Platforms>
 		<Platform
@@ -49,7 +49,6 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="glew32.lib glew32s.lib"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -146,7 +145,7 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath=".\tutorial08.cpp"
+				RelativePath=".\triangle.cpp"
 				>
 			</File>
 		</Filter>

@@ -9,7 +9,7 @@ CXXFLAGS=\
 
 C= gcc
 
-LIBS= -L../lib -LC:/Windows/System32 -lglew32 -lglew32s -lglut32 -lopengl32 -lglu32 ../bin/glut32.dll
+LIBS= ../bin/glut32.dll -L../lib -LC:/Windows/System32 -lglew32 -lglew32s -lglut32 -lopengl32 -lglu32 
 
 
 .PHONY : clean

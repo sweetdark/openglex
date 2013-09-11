@@ -37,7 +37,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="E:\opengl;..\"
+				AdditionalIncludeDirectories="..\include"
 				DebugInformationFormat="3"
 			/>
 			<Tool

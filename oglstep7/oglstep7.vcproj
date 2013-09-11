@@ -36,7 +36,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="..\"
+				AdditionalIncludeDirectories="..\include"
 				DebugInformationFormat="3"
 			/>
 			<Tool
