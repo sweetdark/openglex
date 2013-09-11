@@ -53,4 +53,4 @@ static void ChangeSize(GLsizei w, GLsizei h)
 }
 
 
-MAIN_FUNC("draw line stip")
+//MAIN_FUNC("draw line stip")

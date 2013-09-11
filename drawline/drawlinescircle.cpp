@@ -3,6 +3,8 @@
 #include <math.h>
 
 static GLfloat GL_PI = 3.14159f;
+static GLfloat xRot = 20.0f;
+static GLfloat yRot = 30.0f;
 
 //绘制场景
 static void RenderSences()
@@ -15,8 +17,8 @@ static void RenderSences()
   //保存矩阵
   glPushMatrix();
   //旋转, 如果不旋转，那些不同层次的点都重叠在一起，看不出3D效果了。
-  glRotatef(200.0f, 1.0f, 0.0f, 0.0f);
-  glRotatef(120.5f, 0.0f, 1.0f, 0.0f);
+  glRotatef(xRot, 1.0f, 0.0f, 0.0f);
+  glRotatef(yRot, 0.0f, 1.0f, 0.0f);
   glBegin(GL_LINE_STRIP);
   for (GLfloat a = 0.0; a < GL_PI * 3.0f; a += 0.1f)
   {
@@ -70,15 +72,40 @@ static void CreateWindow() {
   glutCreateWindow("3d Points");
 }
 
-//int main(int args, char **argv)
-//{
-//  glutInit(&args, argv);
-//  glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
-//  glutInitWindowSize(200, 200);
-//  glutCreateWindow("draw points");
-//  SetupRC();
-//  glutDisplayFunc(RenderSences);	
-//  glutReshapeFunc(ChangeSize);
-//  glutMainLoop();
-//  return 0;
-//}
+static void SpecialKey(int key, int x, int y)
+{
+  if (key == GLUT_KEY_UP)
+  {
+    xRot += 5.0f;
+  }
+  if (key == GLUT_KEY_DOWN)
+  {
+    xRot -= 5.0f;
+  }
+  if (key == GLUT_KEY_LEFT)
+  {
+    yRot += 5.0f;
+  }
+  if (key == GLUT_KEY_RIGHT)
+  {
+    yRot -= 5.0f;
+  }
+
+  xRot = (GLint)xRot % 360;
+  yRot = (GLint)yRot % 360;
+  glutPostRedisplay();
+}
+
+int main(int args, char **argv)
+{
+  glutInit(&args, argv);
+  glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
+  glutInitWindowSize(200, 200);
+  glutCreateWindow("draw points");
+  SetupRC();
+  glutDisplayFunc(RenderSences);	
+  glutReshapeFunc(ChangeSize);
+  glutSpecialFunc(SpecialKey);
+  glutMainLoop();
+  return 0;
+}
