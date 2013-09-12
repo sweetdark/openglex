@@ -29,6 +29,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "drawline", "drawline\drawli
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "triangle", "triangle\triangle.vcproj", "{43775CB6-2EC5-418C-8EE2-2D19413668A5}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "polygon", "polygon\polygon.vcproj", "{867269A4-1D60-4FC1-8DEF-21058D444E4A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -91,6 +93,10 @@ Global
 		{43775CB6-2EC5-418C-8EE2-2D19413668A5}.Debug|Win32.Build.0 = Debug|Win32
 		{43775CB6-2EC5-418C-8EE2-2D19413668A5}.Release|Win32.ActiveCfg = Release|Win32
 		{43775CB6-2EC5-418C-8EE2-2D19413668A5}.Release|Win32.Build.0 = Release|Win32
+		{867269A4-1D60-4FC1-8DEF-21058D444E4A}.Debug|Win32.ActiveCfg = Debug|Win32
+		{867269A4-1D60-4FC1-8DEF-21058D444E4A}.Debug|Win32.Build.0 = Debug|Win32
+		{867269A4-1D60-4FC1-8DEF-21058D444E4A}.Release|Win32.ActiveCfg = Release|Win32
+		{867269A4-1D60-4FC1-8DEF-21058D444E4A}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

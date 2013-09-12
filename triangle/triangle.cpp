@@ -27,12 +27,14 @@ static void PopMenu(int key)
 }
 static void RenderScene()
 {
+  //清除颜色缓冲区和深度缓冲区
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	GLfloat x, y, z, angle;
+  //用于颜色判断
   bool color;
 	glColor3f(1.0f, 1.0f, 0.0f);
-
+  //是否开启深度缓冲
   if (bDepth)
   {
     glEnable(GL_DEPTH_TEST);
@@ -41,7 +43,7 @@ static void RenderScene()
   {
     glDisable(GL_DEPTH_TEST);
   }
-
+  //是否开启隐藏面消除
   if (bCull)
   {
     glEnable(GL_CULL_FACE);
@@ -50,7 +52,7 @@ static void RenderScene()
   {
     glDisable(GL_CULL_FACE);
   }
-  
+  //开启线框模式 
   if (bOutLine)
   {
     glPolygonMode(GL_BACK, GL_LINE) ;
@@ -64,7 +66,7 @@ static void RenderScene()
   glPushMatrix();
   glRotatef(xRot, 1.0f, 0.0f, 0.0f);
   glRotatef(yRot, 0.0f, 1.0f, 0.0f);
-
+  //画椎体
   glBegin(GL_TRIANGLE_FAN);
     glVertex3f(0.0f, 0.0f, 70.0f);
 
@@ -81,7 +83,7 @@ static void RenderScene()
   			glColor3f(0.0f, 1.0f, 1.0f);
     }
   glEnd();
-
+  //画椎体的底面
 	glBegin(GL_TRIANGLE_FAN);
   	glVertex2f(0.0f, 0.0f);
 
@@ -107,8 +109,11 @@ static void RenderScene()
 static void SetupRC()
 {
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+  //设置环绕方向
 	glEnable(GL_CW);
+  //设置填充模式
 	glShadeModel(GL_FLAT);
+  //设置要消除的隐藏面，这里设置为反面
   glCullFace(GL_BACK);
 }
 
@@ -170,11 +175,11 @@ int main(int args, char **argv)
   glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
   glutInitWindowPosition(200, 200);
 	glutInitWindowSize(200, 200);
-	glutCreateWindow("draw points");
+	glutCreateWindow("draw solid objects");
   SetupRC();
 
   glutCreateMenu(PopMenu);
-  glutAddMenuEntry("深度缓冲", 1);
+  glutAddMenuEntry("深度测试", 1);
   glutAddMenuEntry("裁剪面", 2);
   glutAddMenuEntry("背面画线", 3);
   glutAttachMenu(GLUT_RIGHT_BUTTON);
