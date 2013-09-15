@@ -31,6 +31,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "triangle", "triangle\triang
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "polygon", "polygon\polygon.vcproj", "{867269A4-1D60-4FC1-8DEF-21058D444E4A}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "triangleedge", "triangleedge\triangleedge.vcproj", "{B6ABD5A3-4FBA-4B9C-A4A8-0C3226FF2BE1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -97,6 +99,10 @@ Global
 		{867269A4-1D60-4FC1-8DEF-21058D444E4A}.Debug|Win32.Build.0 = Debug|Win32
 		{867269A4-1D60-4FC1-8DEF-21058D444E4A}.Release|Win32.ActiveCfg = Release|Win32
 		{867269A4-1D60-4FC1-8DEF-21058D444E4A}.Release|Win32.Build.0 = Release|Win32
+		{B6ABD5A3-4FBA-4B9C-A4A8-0C3226FF2BE1}.Debug|Win32.ActiveCfg = Debug|Win32
+		{B6ABD5A3-4FBA-4B9C-A4A8-0C3226FF2BE1}.Debug|Win32.Build.0 = Debug|Win32
+		{B6ABD5A3-4FBA-4B9C-A4A8-0C3226FF2BE1}.Release|Win32.ActiveCfg = Release|Win32
+		{B6ABD5A3-4FBA-4B9C-A4A8-0C3226FF2BE1}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
