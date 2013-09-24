@@ -72,17 +72,8 @@ static void ChangeSize(GLsizei w, GLsizei h)
 
   //设置可视区域
   GLfloat aspect = (GLfloat)w / (GLfloat)h;
-  if (w <= h)
-  {
-
-    glOrtho(-nRange, nRange, -nRange/aspect, nRange/aspect, -nRange, nRange);
-  }
-  else
-  {
-
-    glOrtho(-nRange*aspect, nRange*aspect, -nRange, nRange, -nRange, nRange);
-  }
-
+  //设置为透视
+  gluPerspective(85.0, aspect, 80.0, 300.0);
   glMatrixMode(GL_MODELVIEW);
   glLoadIdentity();
 }
@@ -99,10 +90,11 @@ int main(int argc, char* argv[])
   glutInit(&argc, argv);
   glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);
   glutInitWindowSize(400,400);
-  glutCreateWindow("OpenGL Stencil Test");
+  glutCreateWindow("atom Test");
   glutReshapeFunc(ChangeSize);
   glutDisplayFunc(RenderScene);
   glutTimerFunc(100, Timer, 1);
+  SetupRC();
   glutMainLoop();
   return 0;
 }
