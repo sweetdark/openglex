@@ -30,7 +30,6 @@ void RenderScene(void)
   glColor3ub(128, 128, 128);
   glBegin(GL_TRIANGLES);
   glNormal3f(0.0f, -1.0f, 0.0f);
-  glNormal3f(0.0f, -1.0f, 0.0f);
   glVertex3f(0.0f, 0.0f, 60.0f);
   glVertex3f(-15.0f, 0.0f, 30.0f);
   glVertex3f(15.0f,0.0f,30.0f);
@@ -245,25 +244,30 @@ void SetupRC()
   // Light values and coordinates
   GLfloat  ambientLight[] = { 0.3f, 0.3f, 0.3f, 1.0f };
   GLfloat  diffuseLight[] = { 0.7f, 0.7f, 0.7f, 1.0f };
+  GLfloat  specular[] = {1.0f, 1.0f, 1.0f, 1.0f};
 
   glEnable(GL_DEPTH_TEST);	// Hidden surface removal
   glFrontFace(GL_CCW);		// Counter clock-wise polygons face out
   glEnable(GL_CULL_FACE);		// Do not calculate inside of jet
 
   // Enable lighting
-  //glEnable(GL_LIGHTING);
+  glEnable(GL_LIGHTING);
 
   // Setup and enable light 0
   glLightfv(GL_LIGHT0,GL_AMBIENT,ambientLight);
   glLightfv(GL_LIGHT0,GL_DIFFUSE,diffuseLight);
+  glLightfv(GL_LIGHT0, GL_SPECULAR, specular);
   glEnable(GL_LIGHT0);
 
+  GLfloat specref[] = {1.0f, 1.0f, 1.0f, 1.0f};
   // Enable color tracking
   glEnable(GL_COLOR_MATERIAL);
 
   // Set Material properties to follow glColor values
   glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
-
+  
+  glMaterialfv(GL_FRONT, GL_SPECULAR, specref);
+  glMateriali(GL_FRONT, GL_SHININESS, 128);
   // Light blue background
   glClearColor(0.0f, 0.0f, 1.0f, 1.0f );
 
