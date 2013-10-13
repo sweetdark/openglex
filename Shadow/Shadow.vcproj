@@ -2,8 +2,8 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="8.00"
-	Name="spot"
-	ProjectGUID="{A09F56F8-BF8B-4F28-A3CB-BDC4FA883F44}"
+	Name="Shadow"
+	ProjectGUID="{7360C018-D61D-409F-83BD-B8ADD99B3024}"
 	>
 	<Platforms>
 		<Platform
@@ -151,7 +151,7 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath=".\spot.cpp"
+				RelativePath=".\shadow.cpp"
 				>
 			</File>
 		</Filter>
