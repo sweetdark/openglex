@@ -120,7 +120,7 @@ void ChangeSize(int w, int h)
   //透视投影变换
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
-  gluPerspective(35.0, faspect, 1.0, -350.0);
+  gluPerspective(35.0, faspect, 1.0, 350.0);
 
   //模型视图矩阵
   glMatrixMode(GL_MODELVIEW);

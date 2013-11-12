@@ -1,46 +1,37 @@
-// Shadow.cpp
-// OpenGL SuperBible
-// Demonstrates simple planar shadows
-// Program by Richard S. Wright Jr.
-
-#include "gltools.h"
-#include "math3d.h"
+#include "gltools.h"       // gltools library
+#include "math3d.h"        // 3D Math Library
 
 // Rotation amounts
 static GLfloat xRot = 0.0f;
 static GLfloat yRot = 0.0f;
 
-// These values need to be available globally
-// Light values and coordinates
 GLfloat  ambientLight[] = { 0.3f, 0.3f, 0.3f, 1.0f };
 GLfloat  diffuseLight[] = { 0.7f, 0.7f, 0.7f, 1.0f };
 GLfloat  specular[] = { 1.0f, 1.0f, 1.0f, 1.0f};
 GLfloat	 lightPos[] = { -75.0f, 150.0f, -50.0f, 0.0f };
 GLfloat  specref[] =  { 1.0f, 1.0f, 1.0f, 1.0f };
 
-// Transformation matrix to project shadow
+//阴影矩阵
 M3DMatrix44f shadowMat;
 
 
-////////////////////////////////////////////////
-// This function just specifically draws the jet
-void DrawJet(int nShadow)
+void DrawJet(int value)
 {
-  M3DVector3f vNormal;	// Storeage for calculated surface normal
-
-  // Nose Cone /////////////////////////////
-  // Set material color, note we only have to set to black
-  // for the shadow once
-  if(nShadow == 0)
-    glColor3ub(128, 128, 128);
+  if (value)
+  {
+    glColor3ub(0, 0, 0);
+  }
   else
-    glColor3ub(0,0,0);
+  {
+    glColor3ub(128, 128, 128);
+  }
 
+  M3DVector3f vNormal;	// Storeage for calculated surface normal
 
   // Nose Cone - Points straight down
   // Set material color
+  glColor3ub(128, 128, 128);
   glBegin(GL_TRIANGLES);
-  glNormal3f(0.0f, -1.0f, 0.0f);
   glNormal3f(0.0f, -1.0f, 0.0f);
   glVertex3f(0.0f, 0.0f, 60.0f);
   glVertex3f(-15.0f, 0.0f, 30.0f);
@@ -240,72 +231,58 @@ void DrawJet(int nShadow)
     glVertex3fv(vPoints[2]);
   }
 
-
   glEnd();
 }
 
 // Called to draw scene
 void RenderScene(void)
 {
-  // Clear the window with current clearing color
-  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-  // Draw the ground, we do manual shading to a darker green
-  // in the background to give the illusion of depth
+  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+  //绘制地板
   glBegin(GL_QUADS);
-  glColor3ub(0,32,0);
-  glVertex3f(400.0f, -150.0f, -200.0f);
-  glVertex3f(-400.0f, -150.0f, -200.0f);
-  glColor3ub(0,255,0);
-  glVertex3f(-400.0f, -150.0f, 200.0f);
-  glVertex3f(400.0f, -150.0f, 200.0f);
+    glColor3ub(0, 32, 0);
+    glVertex3f(400.0f, -150.0f, -200.0f);
+    glVertex3f(-400.0f, -150.0f, -200.0f);
+    glColor3ub(0, 235, 0);
+    glVertex3f(-400.0f, -150.0f, 200.0f);
+    glVertex3f(400.0f, -150.0f, 200.0f);
   glEnd();
 
-  // Save the matrix state and do the rotations
+  //画悬空的喷气式飞机
   glPushMatrix();
+    //开启光照
+    glEnable(GL_LIGHTING);
+    glLightfv(GL_LIGHT0, GL_POSITION, lightPos);
+    //旋转
+    glRotatef(xRot, 1.0f, 0.0f, 0.0f);
+    glRotatef(yRot, 0.0f, 1.0f, 0.0f);
 
-  // Draw jet at new orientation, put light in correct position
-  // before rotating the jet
-  glEnable(GL_LIGHTING);
-  glLightfv(GL_LIGHT0,GL_POSITION,lightPos);
-  glRotatef(xRot, 1.0f, 0.0f, 0.0f);
-  glRotatef(yRot, 0.0f, 1.0f, 0.0f);
+    DrawJet(0);
+    //关闭光照
+    glDisable(GL_DEPTH_TEST);
+    glDisable(GL_LIGHTING);
 
-  DrawJet(0);
-
-  // Restore original matrix state
-  glPopMatrix();	
-
-
-  // Get ready to draw the shadow and the ground
-  // First disable lighting and save the projection state
-  glDisable(GL_DEPTH_TEST);
-  glDisable(GL_LIGHTING);
+  glPopMatrix();
+  //画阴影
   glPushMatrix();
+    //乘以压平的阴影矩阵
+    glMultMatrixf((GLfloat*)shadowMat);
+    //旋转
+    glRotatef(xRot, 1.0f, 0.0f, 0.0f);
+    glRotatef(yRot, 0.0f, 1.0f, 0.0f);
 
-  // Multiply by shadow projection matrix
-  glMultMatrixf((GLfloat *)shadowMat);
-
-  // Now rotate the jet around in the new flattend space
-  glRotatef(xRot, 1.0f, 0.0f, 0.0f);
-  glRotatef(yRot, 0.0f, 1.0f, 0.0f);
-
-  // Pass true to indicate drawing shadow
-  DrawJet(1);	
-
-  // Restore the projection to normal
+    DrawJet(1);
   glPopMatrix();
 
-  // Draw the light source
+  //画光源位置,用小黄球模拟
   glPushMatrix();
-  glTranslatef(lightPos[0],lightPos[1], lightPos[2]);
-  glColor3ub(255,255,0);
-  glutSolidSphere(5.0f,10,10);
+    glTranslatef(lightPos[0], lightPos[1], lightPos[2]);
+    glColor3ub(255, 255, 0);
+    glutSolidSphere(3.0, 15, 15);
   glPopMatrix();
 
-  // Restore lighting state variables
   glEnable(GL_DEPTH_TEST);
-
   // Display the results
   glutSwapBuffers();
 }
@@ -314,46 +291,46 @@ void RenderScene(void)
 // context. 
 void SetupRC()
 {
-  // Any three points on the ground (counter clockwise order)
-  M3DVector3f points[3] = {{ -30.0f, -149.0f, -20.0f },
-  { -30.0f, -149.0f, 20.0f },
-  { 40.0f, -149.0f, 20.0f }};
-
   glEnable(GL_DEPTH_TEST);	// Hidden surface removal
   glFrontFace(GL_CCW);		// Counter clock-wise polygons face out
   glEnable(GL_CULL_FACE);		// Do not calculate inside of jet
 
+  // Enable lighting
+  glEnable(GL_LIGHTING);
+
   // Setup and enable light 0
   glLightfv(GL_LIGHT0,GL_AMBIENT,ambientLight);
   glLightfv(GL_LIGHT0,GL_DIFFUSE,diffuseLight);
-  glLightfv(GL_LIGHT0,GL_SPECULAR,specular);
-  glLightfv(GL_LIGHT0,GL_POSITION,lightPos);
+  glLightfv(GL_LIGHT0, GL_SPECULAR, specular);
+  glLightfv(GL_LIGHT0, GL_POSITION, lightPos);
   glEnable(GL_LIGHT0);
 
+  GLfloat specref[] = {1.0f, 1.0f, 1.0f, 1.0f};
   // Enable color tracking
   glEnable(GL_COLOR_MATERIAL);
 
   // Set Material properties to follow glColor values
   glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
 
-  // All materials hereafter have full specular reflectivity
-  // with a high shine
-  glMaterialfv(GL_FRONT, GL_SPECULAR,specref);
-  glMateriali(GL_FRONT,GL_SHININESS,128);
+  glMaterialfv(GL_FRONT, GL_SPECULAR, specref);
+  glMateriali(GL_FRONT, GL_SHININESS, 128);
+
+  M3DVector3f points[3] = {{ -30.0f, -149.0f, -20.0f },
+  { -30.0f, -149.0f, 20.0f },
+  { 40.0f, -149.0f, 20.0f }};
+
+  M3DVector4f planeVec;
+  m3dGetPlaneEquation(planeVec, points[0], points[1], points[2]);
+  m3dMakePlanarShadowMatrix(shadowMat, planeVec, lightPos);
 
   // Light blue background
   glClearColor(0.0f, 0.0f, 1.0f, 1.0f );
 
-  // Get the plane equation from three points on the ground
-  M3DVector4f vPlaneEquation;
-  m3dGetPlaneEquation(vPlaneEquation, points[0], points[1], points[2]);
-
-  // Calculate projection matrix to draw shadow on the ground
-  m3dMakePlanarShadowMatrix(shadowMat, vPlaneEquation, lightPos);
-
   glEnable(GL_NORMALIZE);
 }
 
+/////////////////////////////////////////////////////
+// Handle arrow keys
 void SpecialKeys(int key, int x, int y)
 {
   if(key == GLUT_KEY_UP)
@@ -385,6 +362,8 @@ void SpecialKeys(int key, int x, int y)
 }
 
 
+//////////////////////////////////////////////////////////
+// Reset projection and light position
 void ChangeSize(int w, int h)
 {
   GLfloat fAspect;
@@ -393,7 +372,6 @@ void ChangeSize(int w, int h)
   if(h == 0)
     h = 1;
 
-
   // Set Viewport to window dimensions
   glViewport(0, 0, w, h);
 
@@ -401,23 +379,22 @@ void ChangeSize(int w, int h)
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
 
-  fAspect = (GLfloat)w/(GLfloat)h;
-  gluPerspective(60.0f, fAspect, 200.0, 500.0);
+  fAspect = (GLfloat) w / (GLfloat) h;
+  gluPerspective(60.0f, fAspect, 1.0f, 500.0f);
 
   glMatrixMode(GL_MODELVIEW);
   glLoadIdentity();
 
-  // Move out Z axis so we can see everything
-  glTranslatef(0.0f, 0.0f, -400.0f);
   glLightfv(GL_LIGHT0,GL_POSITION,lightPos);
+  glTranslatef(0.0f, 0.0f, -400.0f);
 }
 
 int main(int argc, char* argv[])
 {
   glutInit(&argc, argv);
   glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
-  glutInitWindowSize(800, 600);
-  glutCreateWindow("Shadow");
+  glutInitWindowSize(800,600);
+  glutCreateWindow("Lighted Jet");
   glutReshapeFunc(ChangeSize);
   glutSpecialFunc(SpecialKeys);
   glutDisplayFunc(RenderScene);

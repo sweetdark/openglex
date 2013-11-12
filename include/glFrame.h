@@ -32,6 +32,18 @@ class GLFrame
             vForward[0] = 0.0f; vForward[1] = 0.0f; vForward[2] = -1.0f;
             }
 
+    void Reset()
+    {
+
+      // At origin
+      vOrigin[0] = 0.0f; vOrigin[1] = 0.0f; vOrigin[2] = 0.0f; 
+
+      // Up is up (+Y)
+      vUp[0] = 0.0f; vUp[1] = 1.0f; vUp[2] = 0.0f;
+
+      // Forward is -Z (default OpenGL)
+      vForward[0] = 0.0f; vForward[1] = 0.0f; vForward[2] = -1.0f;
+    }
 
         /////////////////////////////////////////////////////////////
         // Set Location
@@ -418,6 +430,8 @@ class GLFrame
             vVectorDst[2] = m[2] * vVectorSrc[0] + m[6] * vVectorSrc[1] + m[10] * vVectorSrc[2];	
             }
         };
+
+
 
 
 #endif
