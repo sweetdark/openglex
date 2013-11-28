@@ -20,6 +20,7 @@ static GLfloat zPos = 0.0f;
 //切换不同的纹理模式
 void ProcessMenu(int value)
 {
+  glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, 1.0f);
   switch (value)
   {
   case 0:

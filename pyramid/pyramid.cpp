@@ -1,5 +1,6 @@
 #include "gltools.h"
 #include "math3d.h"
+#include <stdio.h>
 
 static GLint iWidth, iHeight, iComponents;
 static GLenum eFormat;
@@ -42,11 +43,18 @@ void SetupRC()
 	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 	void *pImage = NULL;
 	pImage = gltLoadTGA("..\\stone.tga", &iWidth, &iHeight, &iComponents, &eFormat);
+  printf("image size is : %d\n", iWidth * iHeight * 3);
 
 	if (pImage)
 	{
     //加载纹理，然后释放临时的内存
-		glTexImage2D(GL_TEXTURE_2D, 0, iComponents, iWidth, iHeight, 0, eFormat, GL_UNSIGNED_BYTE, pImage);
+		//glTexImage2D(GL_TEXTURE_2D, 0, iComponents, iWidth, iHeight, 0, eFormat, GL_UNSIGNED_BYTE, pImage);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_COMPRESSED_RGB, iWidth, iHeight, 0, eFormat, GL_UNSIGNED_BYTE, pImage);
+    GLint flag;
+    glGetTexLevelParameteriv(GL_TEXTURE_2D, 0, GL_TEXTURE_COMPRESSED, &flag);
+    printf("compress flag : %d\n", flag);
+    glGetTexLevelParameteriv(GL_TEXTURE_2D, 0, GL_TEXTURE_COMPRESSED_IMAGE_SIZE, &flag);
+    printf("compress size : %d\n", flag);
 		free(pImage);
 		pImage = NULL;
 	}
