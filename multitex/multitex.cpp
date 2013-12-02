@@ -6,10 +6,13 @@
 #define CUBEMAP 1
 #define TEXTURENUM 2
 
+//纹理对象
 GLuint textureObj[TEXTURENUM] = {0,0};
 
+//纹理路径数组
 static const char *szCubeFile[] = {"..\\pos_x.tga", "..\\neg_x.tga","..\\pos_y.tga", "..\\neg_y.tga","..\\pos_z.tga", "..\\neg_z.tga"};
 
+//立方体贴图
 static GLenum cube[] = {GL_TEXTURE_CUBE_MAP_POSITIVE_X,
 GL_TEXTURE_CUBE_MAP_NEGATIVE_X,
 GL_TEXTURE_CUBE_MAP_POSITIVE_Y,
@@ -98,11 +101,15 @@ void SetupRC()
   glFrontFace(GL_CCW);
   glEnable(GL_CULL_FACE);
 
+  glEnable(GL_BLEND);
+  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
   GLint iWidth, iHeight, iComponents;
   GLenum eFormat;
 
   glGenTextures(TEXTURENUM, textureObj);
 
+  //设置立方体纹理对象状态
   glBindTexture(GL_TEXTURE_CUBE_MAP, textureObj[CUBEMAP]);
   glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
   glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR_MIPMAP_LINEAR);
@@ -121,6 +128,7 @@ void SetupRC()
     }
   }
 
+  //设置污点纹理对象状态
   glBindTexture(GL_TEXTURE_2D, textureObj[COLORMAP]);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
@@ -134,11 +142,13 @@ void SetupRC()
     free(pImage);
   }
 
+  //激活纹理单元0，并启用2D纹理，设置它的纹理和纹理环境，
   glActiveTexture(GL_TEXTURE0);
   glEnable(GL_TEXTURE_2D);
   glBindTexture(GL_TEXTURE_2D, textureObj[COLORMAP]);
   glTexEnvi(GL_TEXTURE_2D, GL_TEXTURE_ENV, GL_DECAL);
 
+  //激活纹理单元1，启用CUBEMAP，并设置它的纹理和纹理环境，纹理生成模式
   glActiveTexture(GL_TEXTURE1);
   glEnable(GL_TEXTURE_CUBE_MAP);
   glBindTexture(GL_TEXTURE_CUBE_MAP, textureObj[CUBEMAP]);
@@ -159,27 +169,30 @@ void RenderScene()
 
   glPushMatrix();
   camra.ApplyCameraTransform();
-
+  //先关闭纹理单元0的2D纹理
   glActiveTexture(GL_TEXTURE0);
   glDisable(GL_TEXTURE_2D);
+  //选择纹理单元1并启用立方体贴图
   glActiveTexture(GL_TEXTURE1);
   glEnable(GL_TEXTURE_CUBE_MAP);
   //天空的纹理坐标手工设置
   glDisable(GL_TEXTURE_GEN_S);
   glDisable(GL_TEXTURE_GEN_T);
   glDisable(GL_TEXTURE_GEN_R);
-  glTexEnvi(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_ENV, GL_REPLACE);
+  glTexEnvi(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_ENV, GL_DECAL);
+
   DrawSkyBox();
   //开启纹理坐标自动生成
   glEnable(GL_TEXTURE_GEN_S);
   glEnable(GL_TEXTURE_GEN_T);
   glEnable(GL_TEXTURE_GEN_R);
-  //glTexEnvi(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_ENV, GL_MODULATE);
+  glTexEnvi(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_ENV, GL_MODULATE);
 
+  //绘制球体，激活纹理0和纹理1进行结合
   glActiveTexture(GL_TEXTURE0);
   glEnable(GL_TEXTURE_2D);
-  //绘制球体
   glPushMatrix();
+  //注意每个纹理单元都有自己的纹理矩阵，这里我们操作纹理1，立方体贴图
   glActiveTexture(GL_TEXTURE1);
   glMatrixMode(GL_TEXTURE);
   glPushMatrix();
@@ -189,7 +202,6 @@ void RenderScene()
   m3dInvertMatrix44(invert,m);
   glMultMatrixf(invert);
 
-  glColor3f(1.0f, 1.0f, 1.0f);
   gltDrawSphere(0.75f, 41, 41);
   glPopMatrix();
   glMatrixMode(GL_MODELVIEW);
@@ -250,6 +262,7 @@ void SpecialKey(int value, int x, int y)
 
   glutPostRedisplay();
 }
+
 
 int main(int args, char *argv[])
 {
