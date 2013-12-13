@@ -2,8 +2,8 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="8.00"
-	Name="snowman"
-	ProjectGUID="{629B9B02-9B00-4757-B6C5-A71756385A33}"
+	Name="sphere"
+	ProjectGUID="{3158D72C-2A75-4FB2-AE50-B940879BFB93}"
 	>
 	<Platforms>
 		<Platform
@@ -36,10 +36,8 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				Optimization="0"
-				AdditionalIncludeDirectories="../include"
+				AdditionalIncludeDirectories="..\include"
 				PreprocessorDefinitions="WIN32"
-				DebugInformationFormat="3"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -53,9 +51,8 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="gltools.lib"
-				AdditionalLibraryDirectories="../lib"
+				AdditionalLibraryDirectories="..\lib"
 				IgnoreDefaultLibraryNames="LIBC.lib"
-				GenerateDebugInformation="true"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -152,7 +149,7 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath=".\snowman.cpp"
+				RelativePath=".\sphere.cpp"
 				>
 			</File>
 		</Filter>
