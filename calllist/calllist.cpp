@@ -3,6 +3,7 @@
 #include "glframe.h"
 #include <math.h>
 #include <stdio.h>
+#include <time.h>
 
 #define SPHERE_NUM 20
 #define GROUND_TEXTURE  0
@@ -26,6 +27,19 @@ GLfloat zTran = 0.0f;
 GLfloat yRot = 0.0f;
 
 M3DMatrix44f mShadow;
+
+static unsigned int spherelist_1;
+static unsigned int spherelist_2;
+static unsigned int torulist;
+static unsigned int groundlist;
+
+
+#define NORMALMODE 1
+#define LISTMODE 2
+static int iMode = NORMALMODE; 
+
+void RenderSpehre(int isShadow);
+void RenderGround();
 
 static void SetupRC()
 {
@@ -91,6 +105,27 @@ static void SetupRC()
   m3dMakePlanarShadowMatrix(mShadow, plane, fLightPos);
 
   glEnable(GL_MULTISAMPLE);
+
+  spherelist_1 = glGenLists(4);
+  spherelist_2 = spherelist_1 + 1;
+  torulist = spherelist_1 + 2;
+  groundlist = spherelist_1 + 3;
+
+  glNewList(spherelist_1, GL_COMPILE);
+    glutSolidSphere(0.3, 20, 20);
+  glEndList();
+
+  glNewList(spherelist_2, GL_COMPILE);
+    glutSolidSphere(0.1, 20, 20);
+  glEndList();
+
+  glNewList(torulist, GL_COMPILE);
+    gltDrawTorus(0.25f, 0.15f, 25, 25);
+  glEndList();
+
+  glNewList(groundlist, GL_COMPILE);
+    RenderGround();
+  glEndList();
 }
 
 static void RenderSpehre(int isShadow)
@@ -109,16 +144,25 @@ static void RenderSpehre(int isShadow)
   {
     glPushMatrix();
     spheres[i].ApplyActorTransform();
-    glutSolidSphere(0.3, 20, 20);
+    if (iMode == LISTMODE)
+      glCallList(spherelist_1);
+    else
+      glutSolidSphere(0.3, 20, 20);
 
     glPopMatrix();
   }
   glPushMatrix();
-    glRotatef(yRot, 0.0f, 1.0f, 0.0f);
-    glBindTexture(GL_TEXTURE_2D, textureObjects[TORUS_TEXTURE]);
+  glRotatef(yRot, 0.0f, 1.0f, 0.0f);
+  glBindTexture(GL_TEXTURE_2D, textureObjects[TORUS_TEXTURE]);
+  if (iMode == LISTMODE)
+    glCallList(torulist);
+  else
     gltDrawTorus(0.25f, 0.15f, 25, 25);
-    glTranslatef(1.0f, 0.0f, 0.0f);
-    glBindTexture(GL_TEXTURE_2D, textureObjects[SPHERE_TEXTURE]);
+  glTranslatef(1.0f, 0.0f, 0.0f);
+  glBindTexture(GL_TEXTURE_2D, textureObjects[SPHERE_TEXTURE]);
+  if (iMode == LISTMODE)
+    glCallList(spherelist_2);
+  else
     glutSolidSphere(0.1, 20, 20);
   glPopMatrix();
 }
@@ -159,12 +203,13 @@ static void RenderGround()
 
 static void TimerFunc(int value)
 {
-  glutPostRedisplay();
-  glutTimerFunc(50, TimerFunc, 1);
+  //glutPostRedisplay();
+  //glutTimerFunc(50, TimerFunc, 1);
 }
 
 static void RenderScene()
 {
+  clock_t t = clock();
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
   yRot += 1.0f;
@@ -177,7 +222,14 @@ static void RenderScene()
   camara.ApplyCameraTransform();  
   glDisable(GL_TEXTURE_GEN_S);
   glDisable(GL_TEXTURE_GEN_T);
-  RenderGround();
+  if (iMode == LISTMODE)
+  {
+    glCallList(groundlist);
+  }
+  else
+  {
+    RenderGround();
+  }
 
   glEnable(GL_TEXTURE_GEN_S);
   glEnable(GL_TEXTURE_GEN_T);
@@ -187,8 +239,8 @@ static void RenderScene()
   glEnable(GL_BLEND);
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
   glPushMatrix();
-    glMultMatrixf(mShadow);
-    RenderSpehre(1);
+  glMultMatrixf(mShadow);
+  RenderSpehre(1);
   glPopMatrix();
   glDisable(GL_BLEND);
 
@@ -198,8 +250,11 @@ static void RenderScene()
   RenderSpehre(0);
   glPopMatrix();
 
-
   glutSwapBuffers();
+  t = clock() - t;
+  char buffer[128] = {0,};
+  wsprintf(buffer, "render clicks is %d", t);
+  glutSetWindowTitle(buffer);
 }
 
 
@@ -224,8 +279,7 @@ static void ChangeSize(GLsizei w, GLsizei h)
 
 static void ShutdownRC()
 {
-
-
+  glDeleteLists(spherelist_1, 4);
 }
 
 void SpecialKey(int value, int x, int y)
@@ -255,6 +309,12 @@ void SpecialKey(int value, int x, int y)
   glutPostRedisplay();
 }
 
+
+void ProcessMenu(int value)
+{
+  iMode = value;
+}
+
 int main(int args, char *argv[])
 {
   glutInit(&args, argv);
@@ -267,6 +327,10 @@ int main(int args, char *argv[])
   glutSpecialFunc(SpecialKey);
   SetupRC();
   glutTimerFunc(50, TimerFunc, 1);
+  glutCreateMenu(ProcessMenu);
+  glutAddMenuEntry("NORMAL", NORMALMODE);
+  glutAddMenuEntry("LIST", LISTMODE);
+  glutAttachMenu(GLUT_RIGHT_BUTTON);
   glutMainLoop();
   ShutdownRC();
 
