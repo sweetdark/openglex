@@ -20,21 +20,28 @@ void RenderSphere()
   glPushMatrix();
   glTranslatef(0.0f, 0.0f, -10.0f);
 
+  //初始化名称栈
   glInitNames();
+  //往栈顶压栈，压如一个名称
   glPushName(0);
   glColor3f(1.0f, 0.0f, 0.0f);
+  //用当前名称SUN替换掉栈顶名称
   glLoadName(SUN);
   glutSolidSphere(1.0, 26, 26);
 
   glRotatef(yRot, 0.0f, 1.0f, 0.0f);
   glTranslatef(2.0f, 0.0f, 0.0f);
   glColor3f(0.0f, 0.0f, 1.0f);
-  glPushName(EARTH);
+  //用EARTH替换掉栈顶名称
+  glLoadName(EARTH);
+  //glPushName(EARTH);
   glutSolidSphere(0.3, 26, 26);
 
   glTranslatef(1.0f, 0.0f, 0.0f);
   glColor3f(0.25f, 0.25f, 0.75f);
-  glPushName(MOON);
+  //用当前名称MOON替换掉栈顶名称
+  glLoadName(MOON);
+  //glPushName(MOON);
   glutSolidSphere(0.1, 26, 26);
   glPopMatrix();
 }
@@ -75,39 +82,37 @@ void TimerFunc(int value)
   glutTimerFunc(50, TimerFunc, 1);
 }
 
-void GetName(GLuint flag, char *str)
+//处理点击记录
+void ProcessHit(int hits, GLuint *buf)
 {
-  if (str == NULL)
+  for (int i = 1; i <= hits; ++i)
   {
-    return;
+    GLuint nameNum = *buf;
+    printf("hit number %d \n", i);
+    printf("name stack count is %d\n", *buf); buf++;
+    printf("min z value is %g\n", (float)*buf/0x7FFFFFFF); buf++;
+    printf("max z value is %g\n", (float)*buf/0x7FFFFFFF); buf++;
+    printf("name value is : ");
+    for (int j = 0; j < nameNum; ++j)
+    {
+      switch(*buf)
+      {
+      case SUN:
+        printf("SUN \t");
+        break;
+      case EARTH:
+        printf("EARTH \t");
+        break;
+      case MOON:
+        printf("MOON \t");
+        break;
+      default:
+        break;
+      }
+      buf++;
+    }
+    printf("\n");
   }
-
-  if (flag == SUN)
-  {
-    strcat(str, " SUM");
-  }
-
-  if (flag == EARTH)
-  {
-    strcat(str, " EARTH");
-  }
-
-  if (flag == MOON)
-  {
-    strcat(str, " MOON");
-  }
-}
-void ProcessBuffer(GLuint *buf)
-{
-  char *str = (char*)malloc(30);
-  ::memset(str, 0, 30);
-
-  printf("%d", buf[0]);
-  for (int i = 0; i < buf[0]; ++i)
-  {
-    GetName(buf[3+i], str);
-  }
-  glutSetWindowTitle(str);
 }
 
 void ProcessSelection(int x, int y)
@@ -115,28 +120,28 @@ void ProcessSelection(int x, int y)
   GLint viewport[4], hits;
 
   static GLuint selectBuffer[BUFFER_LENGTH];
-
+  //设置选择缓冲区
   glSelectBuffer(BUFFER_LENGTH, selectBuffer);
 
+  //切换到投影矩阵，我们需要创建 可视区域
   glMatrixMode(GL_PROJECTION);
+  //保留原先的 投影矩阵，以便恢复
   glPushMatrix();
     glLoadIdentity();
+    //获得视口
     glGetIntegerv(GL_VIEWPORT, viewport);
+    //切换到选择模式
     glRenderMode(GL_SELECT);
     GLfloat aspect = (GLfloat)viewport[2]/(GLfloat)viewport[3];
-
+    //创建一个描述可视区域的矩阵
     gluPickMatrix(x, viewport[3]-y+viewport[1], 2, 2, viewport);
-
+    //与投影矩阵相乘，得到可视区域
     gluPerspective(35.0, aspect, 1.0, 200.0);
-
+    //在选择模式下 渲染图元
     RenderSphere();
-
+    //返回点击记录数。
     hits = glRenderMode(GL_RENDER);
-    if (hits == 1)
-    {
-      ProcessBuffer(selectBuffer);
-    }
-
+    ProcessHit(hits, selectBuffer);
     glMatrixMode(GL_PROJECTION);
   glPopMatrix();
 
