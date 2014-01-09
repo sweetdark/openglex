@@ -127,6 +127,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "oglsbch13", "oglsbch13", "{
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "occusion", "occusion\occusion.vcproj", "{87938AB8-C521-43E9-B4A3-21B1522C5743}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "oglsbch14", "oglsbch14", "{F68F03C2-2B83-4E6F-857D-CD54E07362F9}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shadowmap", "shadowmap\shadowmap.vcproj", "{A9108C1B-6C2D-47D9-BC9B-675EBDAE619E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -341,6 +345,10 @@ Global
 		{87938AB8-C521-43E9-B4A3-21B1522C5743}.Debug|Win32.Build.0 = Debug|Win32
 		{87938AB8-C521-43E9-B4A3-21B1522C5743}.Release|Win32.ActiveCfg = Release|Win32
 		{87938AB8-C521-43E9-B4A3-21B1522C5743}.Release|Win32.Build.0 = Release|Win32
+		{A9108C1B-6C2D-47D9-BC9B-675EBDAE619E}.Debug|Win32.ActiveCfg = Debug|Win32
+		{A9108C1B-6C2D-47D9-BC9B-675EBDAE619E}.Debug|Win32.Build.0 = Debug|Win32
+		{A9108C1B-6C2D-47D9-BC9B-675EBDAE619E}.Release|Win32.ActiveCfg = Release|Win32
+		{A9108C1B-6C2D-47D9-BC9B-675EBDAE619E}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -395,6 +403,7 @@ Global
 		{0EA2C79E-3A6D-47F7-A46F-46D547A1F9DD} = {E432EF3D-AF06-4A3E-A767-97580B7EECC4}
 		{5A1C7381-B75A-42BB-A0D7-7483248E7057} = {E432EF3D-AF06-4A3E-A767-97580B7EECC4}
 		{87938AB8-C521-43E9-B4A3-21B1522C5743} = {314BB4AF-8FE2-45B6-B884-D4DA06D39A77}
+		{A9108C1B-6C2D-47D9-BC9B-675EBDAE619E} = {F68F03C2-2B83-4E6F-857D-CD54E07362F9}
 	EndGlobalSection
 	GlobalSection(DPCodeReviewSolutionGUID) = preSolution
 		DPCodeReviewSolutionGUID = {00000000-0000-0000-0000-000000000000}
