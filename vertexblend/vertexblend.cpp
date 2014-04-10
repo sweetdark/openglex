@@ -9,8 +9,8 @@ GLfloat sphereOfInfluence = 0.5f;
 GLboolean useBlending = true;
 float objRotate[4] = {0.0f, 0.0f, 0.0f, 1.0f};
 float lightPos[] = {100.0f, 200.0f, 300.0f, 1.0f};
-float camaraPos[] = {50.0f, 75.0f, 50.0f, 1.0f};
-float camaraZoom = 0.4f;
+float cameraPos[] = {50.0f, 75.0f, 50.0f, 1.0f};
+float cameraZoom = 0.4f;
 float xTrans = 0.0;
 float yTrans = 0.0;
 float zTrans = 0.0;
@@ -66,6 +66,7 @@ void SetupRC()
   glBindTexture(GL_TEXTURE_1D, 0);
   glTexParameteri(GL_TEXTURE_1D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
   glTexParameteri(GL_TEXTURE_1D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+  glTexParameteri(GL_TEXTURE_1D, GL_TEXTURE_WRAP_S, GL_CLAMP);
   CreateTexture(1.0f, 1.0f, 1.0f);
   glEnable(GL_TEXTURE_1D);
 
@@ -120,7 +121,7 @@ void SetupRC()
   lightPosLocation = glGetUniformLocation(program, "lightPos");
   mv2Loc = glGetUniformLocation(program, "mv2");
   mv2ITLoc = glGetUniformLocation(program, "mv2IT");
-  weightLoc = glGetUniformLocation(program, "weight");
+  weightLoc = glGetAttribLocation(program, "weight");
   
 }
 
@@ -307,16 +308,16 @@ void RenderScene()
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
   float aspect = (float)windowWidth/(float)windowHeight;
-  glFrustum(-camaraZoom, camaraZoom, -camaraZoom/aspect, camaraZoom/aspect, 1.0f, 1000.0f);
+  glFrustum(-cameraZoom, cameraZoom, -cameraZoom/aspect, cameraZoom/aspect, 1.0f, 1000.0f);
   glMatrixMode(GL_MODELVIEW);
   glLoadIdentity();
-  gluLookAt(camaraPos[0], camaraPos[1], camaraPos[2], 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
+  gluLookAt(cameraPos[0], cameraPos[1], cameraPos[2], 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
   glPushMatrix();
 
-  //float mat[4*4];
-  //ConvertQuaternionToMatrix(objRotate, mat);
-  //glMultMatrixf(mat);
-  //glTranslatef(xTrans, yTrans, zTrans);
+  float mat[4*4];
+  ConvertQuaternionToMatrix(objRotate, mat);
+  glMultMatrixf(mat);
+  glTranslatef(xTrans, yTrans, zTrans);
   DrawModels();
   glPopMatrix();
   TwDraw();
@@ -364,8 +365,10 @@ int main(int args, char **argv)
 
   TwBar *bar2 = TwNewBar("Bar2");
   TwDefine("Bar2 size='200 400' color='100 120 100' position='500 20'");
-  TwAddVarRW(bar2, "zoom", TW_TYPE_FLOAT, &camaraZoom, "max=1.5 min=0.3 step=0.1");
+  TwAddVarRW(bar2, "zoom", TW_TYPE_FLOAT, &cameraZoom, "max=1.5 min=0.3 step=0.1");
   TwAddVarRW(bar2, "influence", TW_TYPE_FLOAT, &sphereOfInfluence, "max=1.0 min=0.0 step=0.1");
+  TwAddVarRW(bar2, "elbowBend", TW_TYPE_FLOAT, &elbowBend, "max=150 min=-150 step=5.0");
+  TwAddVarRW(bar2, "cameraPos", TW_TYPE_DIR3F, &cameraPos, "opened=true");
   TwAddButton(bar2, "showBone", ShowBones, NULL, "label='Bone'");
   TwAddButton(bar2, "useBlend", Blend, NULL, "label='Blend'");
   

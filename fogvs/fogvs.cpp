@@ -8,7 +8,7 @@
 
 float g_Rotate[4] = {0.0f, 0.0f, 0.0f, 1.0f};
 float lightPos1[4] = {140.0f, 250.0f, 140.0f, 1.0f};
-float camaraPos[3] = {0.0f, 0.0f, 10.0f};
+float cameraPos[3] = {0.0f, 0.0f, 10.0f};
 float zTrans = -50.0f;
 float yTrans = 0.0f;
 float xTrans = 0.0f;
@@ -167,7 +167,7 @@ void RenderScene()
 
   if (camaraPosLocation != -1)
   {
-    glUniform3fv(camaraPosLocation, 1, camaraPos);
+    glUniform3fv(camaraPosLocation, 1, cameraPos);
   }
 
   if (densityLocation != -1)
@@ -177,7 +177,7 @@ void RenderScene()
 
   glMatrixMode(GL_MODELVIEW);
   glPushMatrix();
-  gluLookAt(camaraPos[0], camaraPos[1], camaraPos[2], 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
+  gluLookAt(cameraPos[0], cameraPos[1], cameraPos[2], 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
   glTranslatef(xTrans, yTrans, zTrans);
   float mat[4*4];
   ConvertQuaternionToMatrix(g_Rotate, mat);
@@ -245,7 +245,7 @@ int main(int args, char **argv)
   TwAddVarRW(bar, "xTrans", TW_TYPE_FLOAT, &xTrans, "group=translate");
   TwAddVarRW(bar, "yTrans", TW_TYPE_FLOAT, &yTrans, "group=translate");
   TwAddVarRW(bar, "zTrans", TW_TYPE_FLOAT, &zTrans, "group=translate");
-  TwAddVarRW(bar, "camara", TW_TYPE_DIR3F, &camaraPos, "label=camarapos opened=true");
+  TwAddVarRW(bar, "camara", TW_TYPE_DIR3F, &cameraPos, "label=camarapos opened=true");
   
   glutMouseFunc((GLUTmousebuttonfun)TwEventMouseButtonGLUT);
   glutMotionFunc((GLUTmousemotionfun)TwEventMouseMotionGLUT);

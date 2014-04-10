@@ -6,7 +6,7 @@
 
 float objRotate[4] = {0.0f, 0.0f, 0.0f, 1.0f};
 float lightPos[3] = {100, 200, 300};
-float camaraPos[3] = {0.0, 0.0, 10.0};
+float cameraPos[3] = {0.0, 0.0, 10.0};
 float xTrans = 0.0;
 float yTrans = 0.0;
 float zTrans = 0.0;
@@ -115,7 +115,7 @@ void RenderScene()
     glUniform1f(squashLocation, squash);
   }
   glLoadIdentity();
-  gluLookAt(camaraPos[0], camaraPos[1], camaraPos[2], 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
+  gluLookAt(cameraPos[0], cameraPos[1], cameraPos[2], 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
   glPushMatrix();
     float mat[4*4];
     ConvertQuaternionToMatrix(objRotate, mat);

@@ -5,7 +5,7 @@
 #define  MAX_INFO_LEN 1024
 float objectRotate[4] = {0.0f, 0.0f, 0.0f, 1.0f};
 float lightPos[4] = {0.0f, 100.0f, 230.0f};
-float camaraPos[3] = {0.0f, 0.0f, 10.0f};
+float cameraPos[3] = {0.0f, 0.0f, 10.0f};
 float xTrans;
 float yTrans;
 float zTrans;
@@ -117,7 +117,7 @@ void RenderScene()
   }
   glMatrixMode(GL_MODELVIEW);
   glLoadIdentity();
-  gluLookAt(camaraPos[0], camaraPos[1], camaraPos[2], 0, 0, 0, 0, 1, 0);
+  gluLookAt(cameraPos[0], cameraPos[1], cameraPos[2], 0, 0, 0, 0, 1, 0);
   glPushMatrix();
     glTranslatef(xTrans, yTrans, zTrans);
     float matrix[4*4];
@@ -162,7 +162,7 @@ int main(int args, char **argv)
   TwAddVarRW(bar, "yTrans", TW_TYPE_FLOAT, &yTrans, "label='y Translate' group='object'");
   TwAddVarRW(bar, "zTrans", TW_TYPE_FLOAT, &zTrans, "label='z Translate' group='object'");
   TwAddVarRW(bar, "lightPos", TW_TYPE_DIR3F, &lightPos, "label='light pos' opened=true");
-  TwAddVarRW(bar, "camaraPos", TW_TYPE_DIR3F, &camaraPos, "label='camara pos' opened=true");
+  TwAddVarRW(bar, "camaraPos", TW_TYPE_DIR3F, &cameraPos, "label='camara pos' opened=true");
   glutMouseFunc((GLUTmousebuttonfun)TwEventMouseButtonGLUT);
   glutMotionFunc((GLUTmousemotionfun)TwEventMouseMotionGLUT);
   glutPassiveMotionFunc((GLUTmousemotionfun)TwEventMouseMotionGLUT);
